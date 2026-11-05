@@ -1,0 +1,24 @@
+# .NET build output
+bin/
+obj/
+
+# Node dependencies
+node_modules/
+
+# Local development settings
+.env
+.env.*
+appsettings.Local.json
+appsettings.*.local.json
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
