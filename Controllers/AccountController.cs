@@ -109,6 +109,9 @@ public sealed class AccountController : Controller
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 return LocalRedirect(returnUrl);
 
+            if (await _userManager.IsInRoleAsync(user, "Resident"))
+                return RedirectToAction("Index", "Resident");
+
             return LocalRedirectToHome();
         }
 
