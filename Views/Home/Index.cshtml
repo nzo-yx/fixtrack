@@ -1,17 +1,35 @@
-﻿@{
-    ViewData["Title"] = "FixTrack";
-}
-
-<section class="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center px-6">
-    <h1 class="text-6xl font-bold tracking-tight">
-        FIXTRACK
-    </h1>
-
-    <p class="mt-4 text-lg text-slate-400">
-        A safer, cleaner community starts here.
-    </p>
-
-    <div class="mt-8 rounded-lg bg-orange-600 px-8 py-3 font-semibold">
-        Report an Issue
+@{ ViewData["Title"] = "Community Action"; }
+<header class="site-header"><a class="brand" href="#intro" aria-label="FixTrack home"><img src="~/images/fixtrack-logo.jpg" alt="FixTrack" /></a><nav aria-label="Main navigation"><a href="#intro">Home</a><a href="#hazards">Community Issues</a><a href="#account" class="nav-action">Log in / Register</a></nav><span class="menu-note">COMMUNITY ACTION PLATFORM</span></header>
+<aside class="rail" aria-label="Page sections"><span id="scene-count">01 / 06</span><div class="rail-track"><span id="rail-progress"></span></div><span>SCROLL TO EXPLORE</span></aside>
+<div class="snap-stage" id="snap-stage">
+<section class="scene hero" id="intro" data-scene="1"><div class="scene-photo" style="background-image:url('/images/landing/fallen-tree.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">01 — YOUR COMMUNITY, YOUR VOICE</p><h1>CHANGE BEGINS<br/>WITH <em>A REPORT.</em></h1><p>Fallen trees. Damaged streets. Everyday problems. One place to raise concerns and follow the work that makes our barangay safer.</p><a class="primary-link" href="#hazards">EXPLORE THE ISSUES <span>↗</span></a></div><div class="scene-label">FIXTRACK / 2026</div></section>
+<section class="scene" id="hazards" data-scene="2"><div class="scene-photo" style="background-image:url('/images/landing/powerlines.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">02 — PUBLIC SAFETY</p><h2>NOTICE A HAZARD?<br/><em>MAKE IT KNOWN.</em></h2><p>Damaged utility poles and fallen power lines deserve prompt attention. Report the location so authorized responders can assess the danger.</p><a class="text-link" href="#account">START A REPORT ↗</a></div></section>
+<section class="scene" id="floods" data-scene="3"><div class="scene-photo" style="background-image:url('/images/landing/flooding.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">03 — DRAINAGE & FLOODING</p><h2>KEEP OUR<br/><em>STREETS MOVING.</em></h2><p>Flag clogged canals, standing water and flooding before they become bigger problems for your neighbors.</p></div></section>
+<section class="scene" id="roads" data-scene="4"><div class="scene-photo" style="background-image:url('/images/landing/roads.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">04 — ROAD CONDITIONS</p><h2>SAFER ROADS.<br/><em>STRONGER COMMUNITY.</em></h2><p>From potholes to damaged public infrastructure, every verified report helps officials identify what needs attention.</p></div></section>
+<section class="scene" id="progress" data-scene="5"><div class="scene-photo" style="background-image:url('/images/landing/community.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">05 — FROM REPORT TO REPAIR</p><h2>SEE THE WORK.<br/><em>FOLLOW THE PROGRESS.</em></h2><p>Residents submit reports. Officials review and assign. Crews repair. Your account keeps the history and status in one place.</p></div></section>
+<section class="scene account-scene" id="account" data-scene="6">
+  <div class="finale-photo" aria-hidden="true"></div>
+  <div class="finale-shade" aria-hidden="true"></div>
+  <div class="finale-content">
+    <p class="eyebrow finale-eyebrow">06 — BE PART OF THE SOLUTION</p>
+    <h2>YOUR VOICE.<br/><em>OUR COMMUNITY.</em></h2>
+    <span class="finale-rule" aria-hidden="true"></span>
+    <p class="finale-copy">Report concerns, track progress, and work together<br class="desktop-break"/> for a safer, stronger barangay.</p>
+    <div class="finale-actions">
+      <button class="finale-primary" type="button" data-open-account="register">CREATE ACCOUNT <span aria-hidden="true">↗</span></button>
+      <button class="finale-secondary" type="button" data-open-account="login">LOG IN <span aria-hidden="true">↗</span></button>
     </div>
+    <div class="finale-features" aria-label="FixTrack benefits">
+      <span>REPORT ISSUES</span><i aria-hidden="true"></i><span>TRACK PROGRESS</span><i aria-hidden="true"></i><span>SEE REAL ACTION</span>
+    </div>
+  </div>
+  <div class="account-overlay hidden" id="account-overlay" role="dialog" aria-modal="true" aria-label="FixTrack account access">
+    <div class="account-card">
+      <button class="account-close" id="close-account" type="button" aria-label="Close account form">×</button>
+      <div class="tab-row" role="tablist" aria-label="Account access"><button class="tab active" type="button" data-tab="login" aria-selected="true">LOG IN</button><button class="tab" type="button" data-tab="register" aria-selected="false">REGISTER</button></div>
+      <form class="account-form" id="login-form" onsubmit="return false"><label>Email address<input type="email" autocomplete="email" placeholder="you@example.com" required/></label><label>Password<input type="password" autocomplete="current-password" placeholder="Your password" required/></label><button type="submit" class="submit-btn" disabled>LOG IN <span>↗</span></button><p class="form-note">Visual preview — authentication will be connected in the next checkpoint.</p></form>
+      <form class="account-form hidden" id="register-form" onsubmit="return false"><label>Full name<input type="text" autocomplete="name" placeholder="Your full name" required/></label><label>Email address<input type="email" autocomplete="email" placeholder="you@example.com" required/></label><label>Password<input type="password" autocomplete="new-password" placeholder="Create a password" required/></label><button type="submit" class="submit-btn" disabled>CREATE ACCOUNT <span>↗</span></button><p class="form-note">Visual preview — registration will be connected in the next checkpoint.</p></form>
+    </div>
+  </div>
 </section>
+</div>
