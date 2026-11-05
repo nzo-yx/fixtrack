@@ -1,5 +1,16 @@
 @{ ViewData["Title"] = "Community Action"; }
-<header class="site-header"><a class="brand" href="#intro" aria-label="FixTrack home"><img src="~/images/fixtrack-logo.jpg" alt="FixTrack" /></a><nav aria-label="Main navigation"><a href="#intro">Home</a><a href="#hazards">Community Issues</a><a href="#account" class="nav-action">Log in / Register</a></nav><span class="menu-note">COMMUNITY ACTION PLATFORM</span></header>
+<link rel="stylesheet" href="~/css/auth-finale.css" asp-append-version="true" />
+<header class="site-header"><a class="brand" href="#intro" aria-label="FixTrack home"><img src="~/images/fixtrack-logo.jpg" alt="FixTrack" /></a><nav aria-label="Main navigation"><a href="#intro">Home</a><a href="#hazards">Community Issues</a>@if (User.Identity?.IsAuthenticated == true)
+        {
+            <form method="post" action="@Url.Action("Logout", "Account")" class="nav-logout-form">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="nav-action">Log out</button>
+            </form>
+        }
+        else
+        {
+            <a href="#account" class="nav-action">Log in / Register</a>
+        }</nav><span class="menu-note">COMMUNITY ACTION PLATFORM</span></header>
 <aside class="rail" aria-label="Page sections"><span id="scene-count">01 / 06</span><div class="rail-track"><span id="rail-progress"></span></div><span>SCROLL TO EXPLORE</span></aside>
 <div class="snap-stage" id="snap-stage">
 <section class="scene hero" id="intro" data-scene="1"><div class="scene-photo" style="background-image:url('/images/landing/fallen-tree.jpg')"></div><div class="scene-wash"></div><div class="scene-content"><p class="eyebrow">01 — YOUR COMMUNITY, YOUR VOICE</p><h1>CHANGE BEGINS<br/>WITH <em>A REPORT.</em></h1><p>Fallen trees. Damaged streets. Everyday problems. One place to raise concerns and follow the work that makes our barangay safer.</p><a class="primary-link" href="#hazards">EXPLORE THE ISSUES <span>↗</span></a></div><div class="scene-label">FIXTRACK / 2026</div></section>
@@ -16,20 +27,54 @@
     <span class="finale-rule" aria-hidden="true"></span>
     <p class="finale-copy">Report concerns, track progress, and work together<br class="desktop-break"/> for a safer, stronger barangay.</p>
     <div class="finale-actions">
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+      <p class="finale-welcome">You are signed in. Your resident dashboard is coming in the next checkpoint.</p>
+      <form method="post" action="@Url.Action("Logout", "Account")">
+        @Html.AntiForgeryToken()
+        <button class="finale-secondary" type="submit">LOG OUT <span aria-hidden="true">↗</span></button>
+      </form>
+    }
+    else
+    {
       <button class="finale-primary" type="button" data-open-account="register">CREATE ACCOUNT <span aria-hidden="true">↗</span></button>
       <button class="finale-secondary" type="button" data-open-account="login">LOG IN <span aria-hidden="true">↗</span></button>
+    }
     </div>
     <div class="finale-features" aria-label="FixTrack benefits">
       <span>REPORT ISSUES</span><i aria-hidden="true"></i><span>TRACK PROGRESS</span><i aria-hidden="true"></i><span>SEE REAL ACTION</span>
     </div>
   </div>
-  <div class="account-overlay hidden" id="account-overlay" role="dialog" aria-modal="true" aria-label="FixTrack account access">
+  @if (User.Identity?.IsAuthenticated != true)
+  {
+  <div class="account-overlay hidden" id="account-overlay" role="dialog" aria-modal="true" aria-label="FixTrack account access" aria-hidden="true">
     <div class="account-card">
       <button class="account-close" id="close-account" type="button" aria-label="Close account form">×</button>
-      <div class="tab-row" role="tablist" aria-label="Account access"><button class="tab active" type="button" data-tab="login" aria-selected="true">LOG IN</button><button class="tab" type="button" data-tab="register" aria-selected="false">REGISTER</button></div>
-      <form class="account-form" id="login-form" onsubmit="return false"><label>Email address<input type="email" autocomplete="email" placeholder="you@example.com" required/></label><label>Password<input type="password" autocomplete="current-password" placeholder="Your password" required/></label><button type="submit" class="submit-btn" disabled>LOG IN <span>↗</span></button><p class="form-note">Visual preview — authentication will be connected in the next checkpoint.</p></form>
-      <form class="account-form hidden" id="register-form" onsubmit="return false"><label>Full name<input type="text" autocomplete="name" placeholder="Your full name" required/></label><label>Email address<input type="email" autocomplete="email" placeholder="you@example.com" required/></label><label>Password<input type="password" autocomplete="new-password" placeholder="Create a password" required/></label><button type="submit" class="submit-btn" disabled>CREATE ACCOUNT <span>↗</span></button><p class="form-note">Visual preview — registration will be connected in the next checkpoint.</p></form>
+      <div class="tab-row" role="tablist" aria-label="Account access">
+        <button class="tab active" type="button" data-tab="login" aria-selected="true">LOG IN</button>
+        <button class="tab" type="button" data-tab="register" aria-selected="false">REGISTER</button>
+      </div>
+      <form class="account-form" id="login-form" action="@Url.Action("Login", "Account")" method="post">
+        @Html.AntiForgeryToken()
+        <label>Email address<input name="Email" type="email" autocomplete="username" placeholder="you@example.com" maxlength="256" required /></label>
+        <label>Password<input name="Password" type="password" autocomplete="current-password" placeholder="Your password" required /></label>
+        <label class="remember-label"><input name="RememberMe" type="checkbox" value="true" /> Remember me</label>
+        <button type="submit" class="submit-btn">LOG IN <span>↗</span></button>
+        <p class="form-note">If sign-in fails, validation messages will appear on the dedicated login page.</p>
+      </form>
+      <form class="account-form hidden" id="register-form" action="@Url.Action("Register", "Account")" method="post">
+        @Html.AntiForgeryToken()
+        <label>Full name<input name="FullName" type="text" autocomplete="name" placeholder="Your full name" maxlength="120" required /></label>
+        <label>Email address<input name="Email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="256" required /></label>
+        <label>Mobile number <span class="phone-required">(required)</span><input name="PhoneNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="09171234567" maxlength="13" pattern="(09[0-9]{9}|\+639[0-9]{9})" title="Use 09XXXXXXXXX or +639XXXXXXXXX" required /><small class="mobile-help">For future OTP and report updates. Verification is not enabled yet.</small></label>
+        <label>Password<input name="Password" type="password" autocomplete="new-password" minlength="8" required /></label>
+        <label>Confirm password<input name="ConfirmPassword" type="password" autocomplete="new-password" minlength="8" required /></label>
+        <button type="submit" class="submit-btn">CREATE ACCOUNT <span>↗</span></button>
+        <p class="form-note">After creating an account, you'll be directed to sign in.</p>
+      </form>
     </div>
   </div>
+  }
+
 </section>
 </div>

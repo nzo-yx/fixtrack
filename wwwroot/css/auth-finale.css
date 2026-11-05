@@ -1,0 +1,20 @@
+
+/* Checkpoint 3E-2: live authentication actions in the final scene */
+.account-overlay .submit-btn{cursor:pointer;opacity:1;transition:background .2s ease}
+.account-overlay .submit-btn:hover{background:#24386b}
+.account-form .remember-label{display:flex;flex-direction:row;align-items:center;gap:10px}
+.account-form .remember-label input{width:16px;height:16px;accent-color:#17204a}
+.nav-logout-form{margin:0}
+.site-header nav .nav-logout-form .nav-action{background:#fff;color:#17204a;font-size:12px;font-weight:800;letter-spacing:.06em;cursor:pointer}
+.site-header nav .nav-logout-form .nav-action:hover{background:#17204a;color:#fff}
+.finale-welcome{width:100%;color:#fff;font-size:15px}
+@media(max-width:650px){.account-overlay .account-card{max-height:calc(100dvh - 100px)}.account-overlay{padding-top:76px}}
+
+/* Registration modal: keep the phone input in view and allow scrolling on compact screens. */
+.account-overlay{padding:90px 16px 16px;overflow-y:auto;overscroll-behavior:contain}
+.account-overlay .account-card{width:min(100%,500px);max-height:calc(100dvh - 112px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.account-form label{display:flex;flex-direction:column;gap:7px}
+.account-form .phone-required{color:#317f68;font-weight:600;font-size:11px}
+.account-form .mobile-help{font-size:11px;font-weight:400;color:#5c687a;line-height:1.4}
+@media(max-height:700px){.account-overlay{align-items:flex-start;padding-top:72px}.account-overlay .account-card{max-height:calc(100dvh - 85px);padding:20px}}
+@media(max-width:650px){.account-overlay{padding:72px 10px 10px}.account-overlay .account-card{max-height:calc(100dvh - 84px);padding:20px}}
